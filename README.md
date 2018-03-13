@@ -62,11 +62,19 @@ iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
 10.0.0.1        node0
 10.0.0.2        node2
 ```
-# Set up Kubernetes https://kubernetes.io/
 
 - Setup passwordless login from master node (node0)
 ```
 ssh-keygen
 ssh-copy-id -i /home/pirate/.ssh/id_rsa.pub pirate@node1
 ssh-copy-id -i /home/pirate/.ssh/id_rsa.pub pirate@node2
+```
+# Set up Kubernetes https://kubernetes.io/
+```
+sudo su -
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/kubernetes.list
+
+apt-get update && apt-get install -y kubeadm kubectl kubernetes-cni
+
 ```
