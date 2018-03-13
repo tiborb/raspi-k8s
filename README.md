@@ -64,3 +64,9 @@ iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
 ```
 # Set up Kubernetes https://kubernetes.io/
 
+- Setup passwordless login from master node (node0)
+```
+ssh-keygen
+ssh-copy-id -i /home/pirate/.ssh/id_rsa.pub pirate@node1
+ssh-copy-id -i /home/pirate/.ssh/id_rsa.pub pirate@node2
+```
