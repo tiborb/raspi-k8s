@@ -12,7 +12,7 @@ Kubernetes cluster built on Raspberry PI
 # Set up OS and networking
 - Flash carts with Hypriot OS images https://github.com/hypriot/flash
 - Configure Neworking inside the cluster
-- Allocate statoc IP ni the master node
+- Allocate statoc IP on the master node
 ```
 allow-hotplug eth0
 iface eth0 inet static
@@ -22,7 +22,7 @@ iface eth0 inet static
     gateway 10.0.0.1
 
 ```
-- Install DHCP Server n master node
+- Install DHCP Server on master node
 ```
 option domain-name "cluster.home";
 option domain-name-servers 8.8.8.8, 8.8.4.4;
@@ -54,6 +54,13 @@ iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
 iptables -A FORWARD -i wlan0 -o eth0 -m state --state RELATED,ESTABLISHED -j ACCEPT
 iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
 
+```
+
+- Edit hosts file
+```
+10.0.0.3        node1
+10.0.0.1        node0
+10.0.0.2        node2
 ```
 # Set up Kubernetes https://kubernetes.io/
 
